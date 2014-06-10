@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="time">00:00:00</div>
+        <script src="moment.min.js"></script>
+        <script>
+        var intervalId = false;
+        var timerDiv = document.querySelector('.time');
+        var timerState = "reset";
+        
+        function documentClicked(){
+            console.log("timer state", timerState)
+            if(timerState === "running"){
+                console.log("running")
+               return stopTimer();
+        
+            }
+            if(timerState === "stopped") {
+                return resetTimer();
+               
+            }
+          if(timerState === "reset"){
+              console.log("starting timer")
+          
+            return startTimer();
+            
+          }
+          
+        }
+        
+        function resetTimer(){
+            timerState = "reset";
+            timerDiv.innerHTML = " 00:00:00";
+        }  
+        
+        function stopTimer(){
+            timerState = "stopped";
+            clearInterval(intervalId);
+            intervalId = false;
+        
+        }
+        
+        
+        function startTimer (){
+            timerState = "running";
+       
+          var start  = moment();
+          
+            var updateTimer = function(){
+                var now = moment ();
+                var timeString = moment(now-start).format('mm:ss:SS');
+                 
+                 timerDiv.innerHTML = timeString;
+            }
+            intervalId = setInterval(updateTimer, 10)
+          };
+            
+          function main(){
+              document.addEventListener("click", documentClicked);
+          } 
+          document.addEventListener('DOMContentLoaded', main);
+               
+
+        </script>
+    </body>
+</html>

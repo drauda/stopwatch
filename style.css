@@ -1,0 +1,10 @@
+body {
+    font-family: sans-serif;
+}
+
+.time {
+    font-size: 5em;
+    color: #FF0000;
+    text-align: center;
+    margin-top: 5em;
+}
